@@ -1,42 +1,60 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import parse from "html-react-parser";
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import axios from 'axios';
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import axios from "axios";
 
-export default function VideoLikeExplanation({ stepDuration = 5000, initialPrompt = "Explain a complex topic." }) { // Add an initial prompt
-  const [steps, setSteps] = useState([]);
+interface Step {
+  title: string;
+  description: string;
+  svg_code?: string;
+}
+
+export default function VideoLikeExplanation({ 
+  stepDuration = 5000, 
+  initialPrompt = "Explain a complex topic." 
+}) { 
+  const [steps, setSteps] = useState<Step[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [replay, setReplay] = useState(false);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchSteps() {
       setLoading(true);
+      setError(null); // ✅ Reset error before fetching
+
       try {
-        const response = await axios.post('http://localhost:8000/explain/generate_steps', { // Corrected endpoint
+        const response = await axios.post("http://localhost:8000/explain/generate_steps", { 
           prompt: initialPrompt,
         });
-        console.log(response);
-        setSteps(response.data.steps);
+
+        if (response.data && Array.isArray(response.data.steps)) {
+          setSteps(response.data.steps);
+        } else {
+          throw new Error("Invalid response format");
+        }
       } catch (err) {
-        setError(err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
       } finally {
         setLoading(false);
       }
     }
 
     fetchSteps();
-  }, [initialPrompt, replay]);
+  }, [initialPrompt]);
 
   useEffect(() => {
     if (isPlaying && steps.length > 0 && currentStepIndex < steps.length) {
       const timer = setTimeout(() => {
         if (currentStepIndex < steps.length - 1) {
-          setCurrentStepIndex(currentStepIndex + 1);
+          setCurrentStepIndex((prev) => prev + 1);
         } else {
           setIsPlaying(false);
         }
@@ -52,22 +70,13 @@ export default function VideoLikeExplanation({ stepDuration = 5000, initialPromp
     }
   }, [currentStepIndex, steps.length]);
 
-  const currentStep = steps[currentStepIndex];
-
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    setIsPlaying((prev) => !prev);
   };
-
-  // const handleReplay = () => {
-  //   setCurrentStepIndex(0);
-  //   setIsPlaying(true);
-  //   setReplay(!replay);
-  // };
 
   const handleReplay = () => {
     setCurrentStepIndex(0);
     setIsPlaying(true);
-    // setReplay(!replay);
   };
 
   if (loading) {
@@ -75,7 +84,7 @@ export default function VideoLikeExplanation({ stepDuration = 5000, initialPromp
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {error}</div>; // ✅ Fixed error display
   }
 
   if (steps.length === 0) {
@@ -85,22 +94,20 @@ export default function VideoLikeExplanation({ stepDuration = 5000, initialPromp
   return (
     <div className="p-4">
       <div>
-        {currentStep && (
+        {steps[currentStepIndex] && (
           <div>
-            <h2>{currentStep.title}</h2>
-            {/* <img src={currentStep.imageUrl} alt={currentStep.imageUrl} /> */}
-            {currentStep.svg_code && (
-                // <div dangerouslySetInnerHTML={{ __html: currentStep.svg_code }} />
-                <div>{parse(currentStep.svg_code)}</div>
+            <h2>{steps[currentStepIndex].title}</h2>
+            {steps[currentStepIndex].svg_code && (
+              <div>{parse(steps[currentStepIndex].svg_code)}</div>
             )}
-            <p>{currentStep.description}</p>
+            <p>{steps[currentStepIndex].description}</p>
           </div>
         )}
       </div>
       <Progress value={progress} className="mt-4 mb-4" />
-      <div className='flex justify-between'>
-      <Button onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</Button>
-      <Button onClick={handleReplay}>Replay</Button>
+      <div className="flex justify-between">
+        <Button onClick={togglePlay}>{isPlaying ? "Pause" : "Play"}</Button>
+        <Button onClick={handleReplay}>Replay</Button>
       </div>
     </div>
   );
