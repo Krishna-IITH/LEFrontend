@@ -17,6 +17,14 @@ import { CoachingExpert } from '@/services/Options'
 function UserInputDialog({children, coachingOption}) {
     const [selectedExpert, setSelectedExpert]=useState();
     const [topic, setTopic]=useState();
+    const [loading, setLoading]=useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const onClickNext = async () =>{
+      setLoading(true);
+      // const result = await create
+      setLoading(false);
+    }
   return (
     <Dialog>
   <DialogTrigger>{children}</DialogTrigger>
