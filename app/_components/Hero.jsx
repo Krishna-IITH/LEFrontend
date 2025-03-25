@@ -1,102 +1,188 @@
-import React from 'react'
-import { Button } from "../../components/ui/button";
-import { Card, CardContent } from "../../components/ui/card";
-import Image from "next/image";
+"use client";
 
-function hero() {
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, BookOpen, Users, Award } from 'lucide-react';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.2,
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12
+    }
+  }
+};
+
+const imageVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: { 
+    scale: 1,
+    opacity: 1,
+    transition: { 
+      type: "spring",
+      stiffness: 80,
+      delay: 0.4
+    }
+  }
+};
+
+const Hero = () => {
   return (
-//     <section className="bg-gray-50">
-//   <div className="mx-auto max-w-screen-xl px-3 py-32 lg:flex lg:items-center">
-//     <div className="mx-auto max-w-xl text-center">
-//       <h1 className="text-3xl font-extrabold sm:text-5xl text-primary">
-//       LEARNEASY
-//         <strong className="font-extrabold text-black sm:block"> Making Learning Easy </strong>
-//       </h1>
-
-//       <p className="mt-4 sm:text-xl/relaxed">
-//         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus
-//         numquam ea!
-//       </p>
-
-//       <div className="mt-8 flex flex-wrap justify-center gap-4">
-//         <a
-//           className="block w-full rounded-sm bg-primary px-12 py-3 text-sm font-medium text-white shadow-sm focus:ring-3 focus:outline-hidden sm:w-auto"
-//           href="#"
-//         >
-//           Get Started
-//         </a>
-//       </div>
-//     </div>
-//   </div>
-// </section>
-<div className="relative min-h-screen bg-white flex flex-col items-center px-6 py-12">
-      {/* Hero Section */}
-      <div className="text-center max-w-5xl py-20">
-        <h1 className="text-6xl font-extrabold text-[#875bf9] mb-6 leading-tight tracking-tight">
-          Learn Smarter with <span className="text-yellow-400">LearnEasy</span>
-        </h1>
-        <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
-          AI-powered personalized learning that adapts to your style, making education engaging, effective, and fun.
-        </p>
-        <Button className="bg-[#875bf9] text-white px-8 py-3 rounded-full shadow-lg hover:bg-[#7644d7] transition text-lg font-medium">
-          Get Started for Free
-        </Button>
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 0.6, x: 0 }}
+          transition={{ duration: 1.2 }}
+          className="absolute top-0 right-0 w-1/2 h-1/2 bg-primary-100 rounded-bl-full blur-3xl transform -translate-y-1/4 translate-x-1/4"
+        ></motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 0.6, x: 0 }}
+          transition={{ duration: 1.2 }}
+          className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-accent/10 rounded-tr-full blur-3xl transform translate-y-1/4 -translate-x-1/4"
+        ></motion.div>
       </div>
 
-      {/* How It Works Section */}
-      <div className="text-center max-w-4xl py-16">
-        <h2 className="text-3xl font-bold text-[#875bf9] mb-8">How It Works</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="p-6 shadow-lg rounded-2xl bg-white text-center border border-gray-200">
-            <CardContent>
-              <h3 className="text-2xl font-semibold mb-2 text-[#875bf9]">AI-Powered Explanations</h3>
-              <p className="text-gray-600">Get visual and interactive explanations tailored to your learning style.</p>
-            </CardContent>
-          </Card>
-          <Card className="p-6 shadow-lg rounded-2xl bg-white text-center border border-gray-200">
-            <CardContent>
-              <h3 className="text-2xl font-semibold mb-2 text-[#875bf9]">Live Whiteboard</h3>
-              <p className="text-gray-600">Collaborate and learn in real-time with interactive tools.</p>
-            </CardContent>
-          </Card>
-          <Card className="p-6 shadow-lg rounded-2xl bg-white text-center border border-gray-200">
-            <CardContent>
-              <h3 className="text-2xl font-semibold mb-2 text-[#875bf9]">Personalized Learning</h3>
-              <p className="text-gray-600">Track progress and receive customized learning recommendations.</p>
-            </CardContent>
-          </Card>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Text Content */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div variants={itemVariants} className="inline-flex items-center px-3 py-1 rounded-full bg-primary-50 border border-primary-200 mb-6">
+              <span className="text-xs font-medium text-primary-700">The Future of Education is Here</span>
+            </motion.div>
+            <motion.h1 variants={itemVariants} className="heading-xl text-gradient mb-6">
+              Transform Your Learning Experience
+            </motion.h1>
+            <motion.p variants={itemVariants} className="text-lg text-foreground/70 mb-8 max-w-lg">
+              EduPulse helps students master subjects faster with AI-powered personalized learning paths, interactive content, and real-time progress tracking.
+            </motion.p>
+
+            {/* Stats Bar */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-8 mb-10">
+              <div className="flex items-center gap-2">
+                <BookOpen size={20} className="text-primary-600" />
+                <div>
+                  <p className="font-bold text-2xl">500+</p>
+                  <p className="text-sm text-foreground/60">Courses</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users size={20} className="text-primary-600" />
+                <div>
+                  <p className="font-bold text-2xl">50k+</p>
+                  <p className="text-sm text-foreground/60">Students</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award size={20} className="text-primary-600" />
+                <div>
+                  <p className="font-bold text-2xl">99%</p>
+                  <p className="text-sm text-foreground/60">Satisfaction</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-wrap gap-4"
+            >
+              <motion.a
+                href="#get-started"
+                className="cta-button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get Started Free
+                <ArrowRight size={16} className="ml-2" />
+              </motion.a>
+              <motion.a
+                href="#demo"
+                className="secondary-button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Watch Demo
+              </motion.a>
+            </motion.div>
+          </motion.div>
+
+          {/* Hero Image */}
+          <motion.div
+            variants={imageVariants}
+            initial="hidden"
+            animate="visible"
+            className="relative flex justify-center lg:justify-end"
+          >
+            <div className="relative w-full max-w-lg">
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                  opacity: [0.7, 0.8, 0.7]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+                className="absolute top-0 left-0 w-full h-full bg-primary-600/10 rounded-2xl blur-3xl transform -rotate-6 scale-105"
+              ></motion.div>
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 200 }}
+                className="relative glass-card overflow-hidden rounded-2xl shadow-xl shadow-primary/10"
+              >
+                <img 
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" 
+                  alt="Students learning with EduPulse"
+                  className="w-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                  <p className="text-white text-lg font-medium">Interactive learning experiences for every student</p>
+                  <div className="flex items-center mt-2">
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
+                          <img 
+                            src={`https://randomuser.me/api/portraits/men/${20 + i}.jpg`} 
+                            alt={`User ${i}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-white/80 text-sm ml-3">+2.5k students joined this week</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
+    </section>
+  );
+};
 
-      {/* Testimonials Section */}
-      <div className="py-16 text-center max-w-5xl">
-        <h2 className="text-3xl font-bold text-[#875bf9] mb-8">What Our Users Say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="p-6 shadow-md rounded-xl bg-white border border-gray-200">
-            <CardContent>
-              <p className="text-gray-600">“LearnEasy transformed how I learn complex topics!”</p>
-              <p className="font-semibold text-[#875bf9] mt-2">— John D.</p>
-            </CardContent>
-          </Card>
-          <Card className="p-6 shadow-md rounded-xl bg-white border border-gray-200">
-            <CardContent>
-              <p className="text-gray-600">“The AI-powered explanations are a game changer!”</p>
-              <p className="font-semibold text-[#875bf9] mt-2">— Sarah L.</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="relative w-full bg-[#875bf9] text-white text-center py-16 mt-16 rounded-t-3xl">
-        <h2 className="text-3xl font-bold">Join LearnEasy Today</h2>
-        <p className="mt-2 mb-6">Start your personalized learning journey now!</p>
-        <Button className="bg-yellow-400 text-[#875bf9] px-6 py-3 rounded-full font-medium shadow-md hover:bg-yellow-500 transition">
-          Get Started
-        </Button>
-      </div>
-    </div>
-  )
-}
-
-export default hero
+export default Hero;
