@@ -76,7 +76,7 @@ const Hero = () => {
               Transform Your Learning Experience
             </motion.h1>
             <motion.p variants={itemVariants} className="text-lg text-foreground/70 mb-8 max-w-lg">
-              EduPulse helps students master subjects faster with AI-powered personalized learning paths, interactive content, and real-time progress tracking.
+              LearnEasy helps students master subjects faster with AI-powered personalized learning paths, interactive content, and real-time progress tracking.
             </motion.p>
 
             {/* Stats Bar */}
@@ -156,7 +156,7 @@ const Hero = () => {
               >
                 <img 
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" 
-                  alt="Students learning with EduPulse"
+                  alt="Students learning with LearnEasy"
                   className="w-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">

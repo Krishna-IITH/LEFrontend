@@ -4,7 +4,7 @@ import { Star, Quote } from 'lucide-react';
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: "EduPulse has completely transformed how I approach studying. The personalized learning path identified exactly where I needed to focus.",
+      quote: "LearnEasy has completely transformed how I approach studying. The personalized learning path identified exactly where I needed to focus.",
       name: "Alex Johnson",
       role: "Computer Science Student",
       avatar: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -18,7 +18,7 @@ const Testimonials = () => {
       rating: 5
     },
     {
-      quote: "The interactive exercises made difficult concepts easy to understand. I improved my grades within just one semester of using EduPulse.",
+      quote: "The interactive exercises made difficult concepts easy to understand. I improved my grades within just one semester of using LearnEasy.",
       name: "Michael Lee",
       role: "High School Student",
       avatar: "https://randomuser.me/api/portraits/men/22.jpg",
@@ -37,7 +37,7 @@ const Testimonials = () => {
             What Our <span className="text-gradient">Users Say</span>
           </h2>
           <p className="text-lg text-foreground/70">
-            Join thousands of satisfied students and educators who have experienced the EduPulse difference.
+            Join thousands of satisfied students and educators who have experienced the LearnEasy difference.
           </p>
         </div>
 

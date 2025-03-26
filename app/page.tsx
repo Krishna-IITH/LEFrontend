@@ -55,9 +55,9 @@ export default function Home() {
         <motion.div variants={sectionVariants}>
           <Features />
         </motion.div>
-        <motion.div variants={sectionVariants}>
+        {/* <motion.div variants={sectionVariants}>
           <CourseShowcase />
-        </motion.div>
+        </motion.div> */}
         <motion.div variants={sectionVariants}>
           <Testimonials />
         </motion.div>

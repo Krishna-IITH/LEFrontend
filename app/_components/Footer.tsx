@@ -42,31 +42,31 @@ const Footer = () => {
           {/* Brand Information */}
           <div className="lg:col-span-2">
             <a href="#" className="inline-block mb-6">
-              <span className="text-2xl font-bold text-primary-600">Edu<span className="text-foreground">Pulse</span></span>
+              <span className="text-2xl font-bold text-primary-600">Learn<span className="text-foreground">Easy</span></span>
             </a>
             <p className="text-foreground/70 mb-6 max-w-md">
-              EduPulse is transforming education through personalized, AI-powered learning experiences that help students achieve their full potential.
+              LearEasy is transforming education through personalized, AI-powered learning experiences that help students achieve their full potential.
             </p>
             
             {/* Contact Information */}
             <div className="space-y-3">
               <div className="flex items-center">
                 <Mail size={18} className="text-primary-600 mr-3" />
-                <a href="mailto:info@edupulse.com" className="text-foreground/70 hover:text-primary-600 transition-colors">
-                  info@edupulse.com
+                <a href="mailto:learneasyed@gmail.com" className="text-foreground/70 hover:text-primary-600 transition-colors">
+                  learneasyed@gmail.com
                 </a>
               </div>
               <div className="flex items-center">
                 <Phone size={18} className="text-primary-600 mr-3" />
                 <a href="tel:+11234567890" className="text-foreground/70 hover:text-primary-600 transition-colors">
-                  +1 (123) 456-7890
+                  +1 (123) 456-7xxx
                 </a>
               </div>
               <div className="flex items-start">
                 <MapPin size={18} className="text-primary-600 mr-3 mt-1" />
                 <span className="text-foreground/70">
-                  123 Education Drive, Suite 456<br />
-                  San Francisco, CA 94105
+                  Department of Entrepreneurship and Management<br />
+                  Indian Institute of Technology, Hyderabad, 502284.
                 </span>
               </div>
             </div>
@@ -116,7 +116,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="pt-10 mt-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center">
           <p className="text-foreground/60 text-sm mb-4 md:mb-0">
-            © {currentYear} EduPulse, Inc. All rights reserved.
+            © {currentYear} LearnEasy, Inc. All rights reserved.
           </p>
           
           {/* Social Links */}

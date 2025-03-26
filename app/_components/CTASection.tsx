@@ -20,7 +20,7 @@ const CTASection = () => {
               Ready to Transform Your Learning Experience?
             </h2>
             <p className="text-lg text-white/80 mb-8 max-w-lg">
-              Join thousands of students who are already experiencing the future of education with EduPulse. Start your journey today!
+              Join thousands of students who are already experiencing the future of education with LearnEasy. Start your journey today!
             </p>
 
             <ul className="space-y-4 mb-10">
@@ -58,7 +58,7 @@ const CTASection = () => {
               <div className="relative w-3/4 aspect-square rounded-3xl overflow-hidden shadow-2xl">
                 <img 
                   src="https://images.unsplash.com/photo-1629872430082-93d8912beccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" 
-                  alt="Student using EduPulse" 
+                  alt="Student using LearnEasy" 
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-900/50 to-transparent"></div>
