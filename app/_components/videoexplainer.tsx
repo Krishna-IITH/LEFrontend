@@ -24,8 +24,7 @@ export default function VideoLikeExplanation({
   useEffect(() => {
     async function fetchSteps() {
       setLoading(true);
-      setError(null); // ✅ Reset error before fetching
-
+      setError("");
       try {
         const response = await axios.post("http://localhost:8000/explain/generate_steps", { 
           prompt: initialPrompt,
@@ -84,7 +83,7 @@ export default function VideoLikeExplanation({
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // ✅ Fixed error display
+    return <div>Error: {error}</div>;
   }
 
   if (steps.length === 0) {
