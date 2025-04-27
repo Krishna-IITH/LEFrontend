@@ -57,7 +57,7 @@ const Header = () => {
         {/* CTA Button */}
         <div className="hidden md:block">
           <a 
-            href="/classroom" 
+            href="/auth" 
             className="cta-button text-sm"
           >
             Get Started
