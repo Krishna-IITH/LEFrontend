@@ -72,7 +72,6 @@ const handleSocialAuth = useGoogleLogin({
       const response = await axios.post('http://localhost:8000/auth', 
         {
         access_token: accessToken,
-        // access_token:'ya29.a0AZYkNZiHEYyad1zvRfRn2TqtT8pArfR47ZjUWqNZHxnwop7zTyzr7m7FWtNFz6u_bXPznbYrSMQuzCyynRtzb6mrZwbwqggbMavSoqaiU3sNP199ezPNzVCCKKsjDuOgc2A5vq7h-hSTlgOv6yV9_m5IrBoW4l81VV2SLJQ7wAaCgYKAXMSARISFQHGX2MiZtdJXtk02W73LUltABsVCg0177'
       },
       {
       headers: {
