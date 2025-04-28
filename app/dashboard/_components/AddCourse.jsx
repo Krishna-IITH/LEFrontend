@@ -8,19 +8,8 @@ import { CoachingOptions } from '../../../services/Options';
 
 
 function AddCourse() {
-  const user = 'NewUser';
   return (
     <div>
-        <div className='flex items-center justify-between'>
-        <div>
-            <div className='text-2xl'>Hi, 
-            <span className='font-bold'> {user}</span></div>
-            <p className='text-sm text-gray-500'>Create new course with AI, Share with friends and Earn from it</p>
-        </div>
-        {/* <Link href={'/create-course'}>
-            <Button>+ Create AI Course</Button>
-        </Link> */}
-    </div>
     <div className='grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10 mt-10'>
           {CoachingOptions.map((option, index)=>(
              <BlurFade key={option.icon} delay={0.25 + index * 0.05} inView>

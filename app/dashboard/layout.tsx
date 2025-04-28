@@ -1,11 +1,10 @@
 'use client';
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import SideBar from './_components/SideBar';
 import Header from './_components/Header';
 import HeroSection from './_components/HeroSection';
-import { ReactNode } from 'react';
+import AddCourse from './_components/AddCourse'
+
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -51,10 +50,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <Header name={user?.name} profile={user?.picture} />
       <main className="container mx-auto px-6 py-8">
         <HeroSection name={user?.name} profile={user?.picture} />
-      </main>
-      <div className="p-10 mt-14 md:px-20 lg:px-32 xl:px-56 2xl:px-72">
+        {/* <AddCourse/> */}
         {children}
-      </div>
+      </main>
+      {/* <div className="p-10 mt-14 md:px-20 lg:px-32 xl:px-56 2xl:px-72">
+      </div> */}
     </div>
   );
 }

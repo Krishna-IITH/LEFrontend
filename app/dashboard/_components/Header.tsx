@@ -43,7 +43,8 @@ const Header: React.FC<HeaderProps> = ({ profile, name }) => {
             onMouseLeave={() => setShowMenu(false)}
           >
             <button
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+              onClick={() => router.push('/profile')}
             >
               Profile
             </button>
