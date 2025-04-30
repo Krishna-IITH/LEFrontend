@@ -9,7 +9,9 @@ import { Motivation } from "./_components/Motivation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { CreateClassModal } from "./_components/CreateClassModal";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type MenuItem = {
   name: string;
@@ -27,21 +29,34 @@ function Dashboard() {
 
   const [activeTab, setActiveTab] = useState("Classes");
   const [menuItems] = useState(defaultMenuItems);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const handleTabChange = (tabName: string) => {
     setActiveTab(tabName);
   };
 
-  const renderContent = () => {
+    const renderContent = () => {
     switch (activeTab) {
       case "Classes":
         return (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <ClassCard title="Mathematics" subject="Algebra" progress={75} />
-            <ClassCard title="Physics" subject="Mechanics" progress={60} />
-            <ClassCard title="Chemistry" subject="Organic" progress={45} />
-            <ClassCard title="Biology" subject="Anatomy" progress={90} />
-            <ClassCard title="English" subject="Literature" progress={30} />
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-medium">Your Classes</h3>
+              <Button 
+                onClick={() => setIsCreateModalOpen(true)} 
+                className="bg-purple-600 hover:bg-purple-700"
+              >
+                <Plus className="mr-2 h-4 w-4" /> Create Class
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <ClassCard title="Mathematics" subject="Algebra" progress={75} />
+              <ClassCard title="Physics" subject="Mechanics" progress={60} />
+              <ClassCard title="Chemistry" subject="Organic" progress={45} />
+              <ClassCard title="Biology" subject="Anatomy" progress={90} />
+              <ClassCard title="English" subject="Literature" progress={30} />
+            </div>
           </div>
         );
       case "Mock Tests":
@@ -56,8 +71,10 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      <div className="flex bg-white rounded-lg mt-10">
+    <div className="min-h-screen bg-gray-50 flex w-full flex-col">
+
+      <div className="">
+        <div className="flex bg-white rounded-lg mt-10">
           <div className="w-48 py-4 border-r border-gray-100">
             <nav className="flex flex-col gap-1 px-2">
               {menuItems.map((item) => (
@@ -89,12 +106,12 @@ function Dashboard() {
           </div>
         </div>
       </div>
-    // <div className="min-h-screen bg-gray-50">
-    //   <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-2'>
-    //     <History/>
-    //     <FeedBack/>
-    //   </div>
-    // </div>
+      
+      <CreateClassModal 
+        isOpen={isCreateModalOpen} 
+        onClose={() => setIsCreateModalOpen(false)} 
+      />
+    </div>
   )
 }
 
