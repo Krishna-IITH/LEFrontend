@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -12,12 +12,22 @@ interface CreateClassModalProps {
 }
 
 export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => {
-  const [examType, setExamType] = useState("");
+  const [exam, setExam] = useState("");
+  const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+      const localData = localStorage.getItem('response');
+      // console.log(localData);
+      if (localData) {
+        const data = JSON.parse(localData);
+        setEmail(data.email);
+      }
+      })
 
-  const examTypes = ["JEE", "NEET", "UPSC", "CAT", "GATE", "Class 12", "Class 11", "Class 10"];
+  const exams = ["JEE", "NEET", "UPSC", "CAT", "GATE", "Class 12", "Class 11", "Class 10"];
   
   const subjectMap = {
     JEE: ["Physics", "Chemistry", "Mathematics"],
@@ -39,13 +49,13 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
   };
 
   // Get the appropriate subjects based on the selected exam type
-  const subjects = examType ? subjectMap[examType as keyof typeof subjectMap] || [] : [];
+  const subjects = exam ? subjectMap[exam as keyof typeof subjectMap] || [] : [];
   
   // Get the appropriate topics based on the selected subject
   const topics = subject ? topicMap[subject as keyof typeof topicMap] || [] : [];
 
   const handleSubmit = async () => {
-    if (!examType || !subject || !topic) {
+    if (!exam || !subject || !topic) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -54,17 +64,21 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
     
     try {
       // This would be the actual API endpoint in a real application
-      const response = await fetch("/api/classes", {
+      const response = await fetch("http://localhost:8000/class/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          examType,
+          email,
+          exam,
           subject,
           topic,
+          progress_percentage: 0
         }),
       });
+
+      // console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to create class");
@@ -75,7 +89,7 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
       onClose();
     } catch (error) {
       // Since we don't have a backend, we'll just simulate a successful response
-      console.log("Would send:", { examType, subject, topic });
+      // console.log("Would send:", { exam, subject, topic });
       toast.success("Class created successfully (simulated)!");
       onClose();
     } finally {
@@ -92,12 +106,12 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="exam-type">Exam Type</Label>
-            <Select value={examType} onValueChange={setExamType}>
+            <Select value={exam} onValueChange={setExam}>
               <SelectTrigger id="exam-type">
                 <SelectValue placeholder="Select exam type" />
               </SelectTrigger>
               <SelectContent>
-                {examTypes.map((exam) => (
+                {exams.map((exam) => (
                   <SelectItem key={exam} value={exam}>
                     {exam}
                   </SelectItem>
@@ -111,7 +125,7 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
             <Select 
               value={subject} 
               onValueChange={setSubject}
-              disabled={!examType}
+              disabled={!exam}
             >
               <SelectTrigger id="subject">
                 <SelectValue placeholder="Select subject" />
@@ -163,7 +177,7 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
           <Button 
             type="submit" 
             onClick={handleSubmit} 
-            className="bg-purple-600 hover:bg-purple-700"
+            className="cta-button"
             disabled={loading}
           >
             {loading ? "Creating..." : "Create Class"}

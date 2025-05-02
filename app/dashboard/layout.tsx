@@ -22,11 +22,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   useEffect(() => {
     const localData = localStorage.getItem('response');
-    console.log(localData);
+    // console.log(localData);
     if (localData) {
       try {
         const data = JSON.parse(localData);
-        console.log(data);
+        // console.log(data);
         setUser({
           name: data.name,
           picture: data.picture,

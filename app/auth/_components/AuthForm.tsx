@@ -22,6 +22,7 @@ const handleSocialAuth = useGoogleLogin({
   onSuccess: async (tokenResponse) => {
     try {
       const accessToken = tokenResponse.access_token;
+      localStorage.setItem('access_token', accessToken);
       console.log('Access Token', accessToken);
 
       const response = await axios.post('http://localhost:8000/auth', 

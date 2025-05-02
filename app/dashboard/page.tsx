@@ -1,7 +1,7 @@
 "use client";
-import React from 'react'
-import History from './_components/History'
-import FeedBack from './_components/FeedBack'
+import React, {useEffect} from 'react';
+import History from './_components/History';
+import FeedBack from './_components/FeedBack';
 import { ClassCard } from "./_components/ClassCard";
 import { MockTests } from "./_components/MockTests";
 import { Notes } from "./_components/Notes";
@@ -12,6 +12,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { CreateClassModal } from "./_components/CreateClassModal";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+
 
 type MenuItem = {
   name: string;
@@ -28,8 +30,34 @@ const defaultMenuItems: MenuItem[] = [
 function Dashboard() {
 
   const [activeTab, setActiveTab] = useState("Classes");
+  const [classesData, setClassesData] = useState<any[]>([]);
   const [menuItems] = useState(defaultMenuItems);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  const userInfo = localStorage.getItem("access_token") || "{}";
+  const token = userInfo;
+  
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const res = await axios.post("http://localhost:8000/class/list", 
+          {
+            access_token: token,
+          },
+          {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        setClassesData(res.data);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+    };
+  
+    fetchClasses();
+  }, []);
 
   const handleTabChange = (tabName: string) => {
     setActiveTab(tabName);
@@ -44,18 +72,27 @@ function Dashboard() {
               <h3 className="text-lg font-medium">Your Classes</h3>
               <Button 
                 onClick={() => setIsCreateModalOpen(true)} 
-                className="bg-purple-600 hover:bg-purple-700"
+                className="cta-button"
               >
                 <Plus className="mr-2 h-4 w-4" /> Create Class
               </Button>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              <ClassCard title="Mathematics" subject="Algebra" progress={75} />
+              {/* <ClassCard title="Mathematics" subject="Algebra" progress={75} />
               <ClassCard title="Physics" subject="Mechanics" progress={60} />
               <ClassCard title="Chemistry" subject="Organic" progress={45} />
               <ClassCard title="Biology" subject="Anatomy" progress={90} />
               <ClassCard title="English" subject="Literature" progress={30} />
+               */}
+               {classesData.map((item, idx) => (
+                <ClassCard
+                  key={idx}
+                  title={item.exam}
+                  subject={item.subject +': '+ item.topic}
+                  progress={item.progress}
+                />
+              ))}
             </div>
           </div>
         );
@@ -108,7 +145,7 @@ function Dashboard() {
       </div>
       
       <CreateClassModal 
-        isOpen={isCreateModalOpen} 
+        isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)} 
       />
     </div>

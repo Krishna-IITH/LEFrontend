@@ -93,7 +93,7 @@ const Header = () => {
             </a>
           ))}
           <a 
-            href="/classroom" 
+            href="/auth" 
             className="cta-button text-base mt-6 w-full flex justify-center"
             onClick={() => setIsMenuOpen(false)}
           >
