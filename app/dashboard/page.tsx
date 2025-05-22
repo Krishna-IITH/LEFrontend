@@ -2,6 +2,7 @@
 import React, {useEffect} from 'react';
 import History from './_components/History';
 import FeedBack from './_components/FeedBack';
+import HeroSection from './_components/HeroSection';
 import { ClassCard } from "./_components/ClassCard";
 import { MockTests } from "./_components/MockTests";
 import { Notes } from "./_components/Notes";
@@ -13,7 +14,13 @@ import { CreateClassModal } from "./_components/CreateClassModal";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { BrowserRouter } from 'react-router-dom';
 
+
+interface UserData {
+  name: string;
+  picture: string;
+}
 
 type MenuItem = {
   name: string;
@@ -28,7 +35,8 @@ const defaultMenuItems: MenuItem[] = [
 ];
 
 function Dashboard() {
-
+  
+  const [user, setUser] = useState<UserData | null>(null);
   const [activeTab, setActiveTab] = useState("Classes");
   const [classesData, setClassesData] = useState<any[]>([]);
   const [menuItems] = useState(defaultMenuItems);
@@ -38,6 +46,15 @@ function Dashboard() {
   const token = userInfo;
   
   useEffect(() => {
+    const localData = localStorage.getItem('response');
+    if (localData) {
+      const data = JSON.parse(localData);
+      setUser({
+        name: data.name,
+        picture: data.picture,
+      });
+    }
+
     const fetchClasses = async () => {
       try {
         const res = await axios.post("http://localhost:8000/class/list", 
@@ -88,8 +105,8 @@ function Dashboard() {
                {classesData.map((item, idx) => (
                 <ClassCard
                   key={idx}
-                  title={item.exam}
-                  subject={item.subject +': '+ item.topic}
+                  title={item.exam +': '+ item.topic}
+                  subject={item.subject}
                   progress={item.progress}
                 />
               ))}
@@ -108,10 +125,15 @@ function Dashboard() {
   };
 
   return (
+     <BrowserRouter>
+    <div className='container mx-auto py-6 px-4'>
+    <HeroSection name={user?.name} profile={user?.picture} />
+    </div>
+    
     <div className="min-h-screen bg-gray-50 flex w-full flex-col">
 
-      <div className="">
-        <div className="flex bg-white rounded-lg mt-10">
+      <div className="container mx-auto">
+        <div className="flex bg-white rounded-lg mt-4">
           <div className="w-48 py-4 border-r border-gray-100">
             <nav className="flex flex-col gap-1 px-2">
               {menuItems.map((item) => (
@@ -149,6 +171,7 @@ function Dashboard() {
         onClose={() => setIsCreateModalOpen(false)} 
       />
     </div>
+    </BrowserRouter>
   )
 }
 

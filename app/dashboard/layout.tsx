@@ -2,7 +2,6 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from './_components/Header';
-import HeroSection from './_components/HeroSection';
 import AddCourse from './_components/AddCourse'
 
 
@@ -48,8 +47,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div>
       <Header name={user?.name} profile={user?.picture} />
-      <main className="container mx-auto px-6 py-8">
-        <HeroSection name={user?.name} profile={user?.picture} />
+      <main className="mx-auto">
         {/* <AddCourse/> */}
         {children}
       </main>
