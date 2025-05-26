@@ -660,11 +660,28 @@ const generateAudio = async (textToConvert: string) => {
     }
   };
 
-  useEffect(() => {
-    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    debounceTimeout.current = setTimeout(() => generateAudio(translatedText), 1000);
-    return () => debounceTimeout.current && clearTimeout(debounceTimeout.current);
-  }, [text]);
+  // useEffect(() => {
+  //   if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+  //   debounceTimeout.current = setTimeout(() => generateAudio(translatedText), 1000);
+  //   return () => debounceTimeout.current && clearTimeout(debounceTimeout.current);
+  // }, [text]);
+
+useEffect(() => {
+  if (debounceTimeout.current) {
+    clearTimeout(debounceTimeout.current);
+  }
+
+  debounceTimeout.current = setTimeout(() => {
+    generateAudio(text);
+  }, 1000);
+
+  return () => {
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+  };
+}, [text]);
+
 
   const handleLanguageChange = async (language: string) => {
     setSelectedLanguage(language);
