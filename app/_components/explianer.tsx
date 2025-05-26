@@ -28,7 +28,7 @@ function explianer() {
 
     const fetchExplanation = async () => {
         console.log(topic);
-          const res = await fetch("http://localhost:8000/explain", {
+          const res = await fetch("https://le-klk9.onrender.com/explain", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ topic })
@@ -42,7 +42,7 @@ function explianer() {
         };
 
         const getTranslation = async () => {
-            const res = await fetch("http://localhost:8000/translate", { // Call FastAPI instead
+            const res = await fetch("https://le-klk9.onrender.com/translate", { // Call FastAPI instead
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

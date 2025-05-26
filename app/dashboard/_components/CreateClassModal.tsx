@@ -68,7 +68,7 @@ export const CreateClassModal = ({ isOpen, onClose, onSuccess }: CreateClassModa
     
     try {
       // This would be the actual API endpoint in a real application
-      const response = await fetch("http://localhost:8000/class/", {
+      const response = await fetch("https://le-klk9.onrender.com/class", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

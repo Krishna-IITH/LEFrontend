@@ -25,7 +25,7 @@ const handleSocialAuth = useGoogleLogin({
       localStorage.setItem('access_token', accessToken);
       console.log('Access Token', accessToken);
 
-      const response = await axios.post('http://localhost:8000/auth', 
+      const response = await axios.post('https://le-klk9.onrender.com/auth', 
         {
         access_token: accessToken,
       },

@@ -46,7 +46,7 @@ function Dashboard() {
   const token = userInfo;
   const fetchClasses = async () => {
       try {
-        const res = await axios.post("http://localhost:8000/class/list", 
+        const res = await axios.post("https://le-klk9.onrender.com/class/list", 
           {
             access_token: token,
           },

@@ -26,7 +26,7 @@ export default function VideoLikeExplanation({
       setLoading(true);
       setError("");
       try {
-        const response = await axios.post("http://localhost:8000/explain/generate_steps", { 
+        const response = await axios.post("https://le-klk9.onrender.com/explain/generate_steps", { 
           prompt: initialPrompt,
         });
 
