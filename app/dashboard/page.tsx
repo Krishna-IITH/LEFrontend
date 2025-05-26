@@ -44,18 +44,7 @@ function Dashboard() {
 
   const userInfo = localStorage.getItem("access_token") || "{}";
   const token = userInfo;
-  
-  useEffect(() => {
-    const localData = localStorage.getItem('response');
-    if (localData) {
-      const data = JSON.parse(localData);
-      setUser({
-        name: data.name,
-        picture: data.picture,
-      });
-    }
-
-    const fetchClasses = async () => {
+  const fetchClasses = async () => {
       try {
         const res = await axios.post("http://localhost:8000/class/list", 
           {
@@ -73,6 +62,15 @@ function Dashboard() {
       }
     };
   
+  useEffect(() => {
+    const localData = localStorage.getItem('response');
+    if (localData) {
+      const data = JSON.parse(localData);
+      setUser({
+        name: data.name,
+        picture: data.picture,
+      });
+    }    
     fetchClasses();
   }, []);
 
@@ -126,14 +124,10 @@ function Dashboard() {
 
   return (
      <BrowserRouter>
-    <div className='container mx-auto py-6 px-4'>
-    <HeroSection name={user?.name} profile={user?.picture} />
-    </div>
-    
-    <div className="min-h-screen bg-gray-50 flex w-full flex-col">
-
-      <div className="container mx-auto">
-        <div className="flex bg-white rounded-lg mt-4">
+     <div className="min-h-screen bg-gray-50 flex w-full flex-col">
+       <div className="container mx-auto px-6 py-8">
+        <HeroSection name={user?.name} profile={user?.picture} />
+        <div className="flex bg-white rounded-lg shadow-sm">
           <div className="w-48 py-4 border-r border-gray-100">
             <nav className="flex flex-col gap-1 px-2">
               {menuItems.map((item) => (
@@ -152,7 +146,6 @@ function Dashboard() {
               ))}
             </nav>
           </div>
-
           <div className="flex-1">
             <ScrollArea className="h-[calc(100vh)]">
               <div className="p-6">
@@ -164,13 +157,13 @@ function Dashboard() {
             </ScrollArea>
           </div>
         </div>
-      </div>
-      
-      <CreateClassModal 
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)} 
+       </div>
+       <CreateClassModal 
+        isOpen={isCreateModalOpen} 
+        onClose={() => setIsCreateModalOpen(false)}
+        onSuccess={fetchClasses}  
       />
-    </div>
+     </div>
     </BrowserRouter>
   )
 }

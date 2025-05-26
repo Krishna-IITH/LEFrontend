@@ -45,6 +45,7 @@ const TutorialAudio = ({
 
   // Function to get language-specific audio URL
   const getAudioUrlForLanguage = () => {
+    console.log('url:' + audioUrl)
     if (!audioUrl) return "";
     // In a real implementation, audio files would be named with language codes
     // For example: /audio/slide1_en-IN.mp3, /audio/slide1_hi-IN.mp3

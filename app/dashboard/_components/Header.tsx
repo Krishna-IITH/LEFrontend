@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ profile, name }) => {
   };
 
   return (
-    <header className="w-full px-6 py-4 bg-white shadow-sm flex sticky justify-between items-center mb-4 z-30 top-0">
+    <header className="w-full px-6 py-4 bg-white shadow-sm flex sticky justify-between items-center z-30 top-0">
       <h1 className="text-purple-600 text-xl font-medium">LEARNEASY</h1>
       
       <div className="relative">

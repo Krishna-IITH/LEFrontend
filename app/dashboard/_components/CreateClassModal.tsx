@@ -4,14 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-
+// import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 interface CreateClassModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuccess: () => void; // <-- new
 }
 
-export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => {
+export const CreateClassModal = ({ isOpen, onClose, onSuccess }: CreateClassModalProps) => {
   const [exam, setExam] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -27,24 +28,27 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
       }
       })
 
-  const exams = ["JEE", "NEET", "UPSC", "CAT", "GATE", "Class 12", "Class 11", "Class 10"];
+  // const exams = ["JEE", "NEET", "UPSC", "CAT", "GATE", "Class 12", "Class 11", "Class 10"];
+  const exams = ["JEE"];
   
   const subjectMap = {
-    JEE: ["Physics", "Chemistry", "Mathematics"],
-    NEET: ["Physics", "Chemistry", "Biology"],
-    UPSC: ["History", "Geography", "Polity", "Economics", "Environment", "Science & Technology"],
-    CAT: ["Quantitative Ability", "Verbal Ability", "Data Interpretation", "Logical Reasoning"],
-    GATE: ["Engineering Mathematics", "Computer Science", "Information Technology"],
-    "Class 12": ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science"],
-    "Class 11": ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science"],
-    "Class 10": ["Science", "Mathematics", "Social Studies", "English", "Hindi"],
+    JEE: ["Mathematics"],
+    // JEE: ["Physics", "Chemistry", "Mathematics"],
+    // NEET: ["Physics", "Chemistry", "Biology"],
+    // UPSC: ["History", "Geography", "Polity", "Economics", "Environment", "Science & Technology"],
+    // CAT: ["Quantitative Ability", "Verbal Ability", "Data Interpretation", "Logical Reasoning"],
+    // GATE: ["Engineering Mathematics", "Computer Science", "Information Technology"],
+    // "Class 12": ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science"],
+    // "Class 11": ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science"],
+    // "Class 10": ["Science", "Mathematics", "Social Studies", "English", "Hindi"],
   };
   
   const topicMap = {
-    Physics: ["Mechanics", "Thermodynamics", "Electromagnetism", "Optics", "Modern Physics"],
-    Chemistry: ["Organic", "Inorganic", "Physical", "Biochemistry"],
-    Mathematics: ["Algebra", "Calculus", "Geometry", "Trigonometry", "Statistics"],
-    Biology: ["Anatomy", "Physiology", "Zoology", "Botany", "Genetics"],
+    Mathematics: ["STATISTICS AND PROBABILITY"]
+    // Physics: ["Mechanics", "Thermodynamics", "Electromagnetism", "Optics", "Modern Physics"],
+    // Chemistry: ["Organic", "Inorganic", "Physical", "Biochemistry"],
+    // Mathematics: ["Algebra", "Calculus", "Geometry", "Trigonometry", "Statistics"],
+    // Biology: ["Anatomy", "Physiology", "Zoology", "Botany", "Genetics"],
     // More topics for other subjects would go here
   };
 
@@ -87,6 +91,7 @@ export const CreateClassModal = ({ isOpen, onClose }: CreateClassModalProps) => 
       // For demonstration purposes, we'll just show a success message
       toast.success("Class created successfully!");
       onClose();
+      onSuccess(); 
     } catch (error) {
       // Since we don't have a backend, we'll just simulate a successful response
       // console.log("Would send:", { exam, subject, topic });

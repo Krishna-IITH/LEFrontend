@@ -1,0 +1,113 @@
+{
+    title: "Limits and Continuity: Essential Concepts for JEE Advanced",
+    subject: "Mathematics",
+    topic: "Calculus - Limits and Continuity",
+    slides: [
+      { 
+        id: 1, 
+        // imageUrl: "/lovable-uploads/e16f8762-b917-4476-b969-5c6888160c7d.png",
+        title: "Introduction to Limits",
+        content: "Limits are fundamental to calculus and a critical concept in JEE Advanced mathematics. A limit describes the value a function approaches as the input approaches some value.",
+        audioUrl: "/audio/slide1.mp3",
+        formulas: [
+          "lim(x→a) f(x) = L"
+        ]
+      },
+      { 
+        id: 2, 
+        // imageUrl: "/lovable-uploads/aae89a4e-f701-430d-827b-8dd055210771.png",
+        title: "Properties of Limits",
+        content: "Understanding these properties will help you solve complex limit problems efficiently in your JEE Advanced exam.",
+        audioUrl: "/audio/slide2.mp3",
+        formulas: [
+          "lim(x→a) [f(x) ± g(x)] = lim(x→a) f(x) ± lim(x→a) g(x)",
+          "lim(x→a) [f(x) × g(x)] = lim(x→a) f(x) × lim(x→a) g(x)",
+          "lim(x→a) [f(x) / g(x)] = lim(x→a) f(x) / lim(x→a) g(x), if lim(x→a) g(x) ≠ 0"
+        ]
+      },
+      { 
+        id: 3,
+        title: "Evaluating Limits",
+        content: "When direct substitution leads to indeterminate forms like 0/0 or ∞/∞, we need special techniques to evaluate limits.",
+        audioUrl: "/audio/slide3.mp3",
+        formulas: [
+          "L'Hôpital's Rule: lim(x→a) [f(x)/g(x)] = lim(x→a) [f'(x)/g'(x)]",
+          "lim(x→0) (sin x)/x = 1",
+          "lim(x→0) (1-cos x)/x² = 1/2"
+        ],
+        examples: [
+          {
+            problem: "Evaluate lim(x→0) (e^x - 1 - x)/x²",
+            solution: "Use Taylor series expansion of e^x = 1 + x + x²/2 + ... to get lim(x→0) (x²/2 + higher terms)/x² = 1/2"
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Continuity of Functions",
+        content: "A function f is continuous at point 'a' if the following three conditions are satisfied: (1) f(a) is defined, (2) lim(x→a) f(x) exists, and (3) lim(x→a) f(x) = f(a).",
+        audioUrl: "/audio/slide4.mp3",
+        formulas: [
+          "f is continuous at x = a if lim(x→a) f(x) = f(a)"
+        ],
+        examples: [
+          {
+            problem: "Is f(x) = |x|/x continuous at x = 0?",
+            solution: "No, f(0) is undefined as division by zero is undefined. The function is discontinuous at x = 0."
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: "Types of Discontinuities",
+        content: "Understanding different types of discontinuities is crucial for solving JEE Advanced problems on continuity.",
+        audioUrl: "/audio/slide5.mp3",
+        formulas: [],
+        examples: [
+          {
+            problem: "Find the type of discontinuity in f(x) = (x² - 1)/(x - 1)",
+            solution: "This has a removable discontinuity at x = 1. We can rewrite as f(x) = x + 1 for x ≠ 1, and then define f(1) = 2 to make it continuous."
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: "Intermediate Value Theorem",
+        content: "If f is continuous on [a,b] and k is between f(a) and f(b), then there exists at least one c in [a,b] such that f(c) = k. This theorem is often used to prove existence of roots.",
+        audioUrl: "/audio/slide6.mp3",
+        examples: [
+          {
+            problem: "Show that the equation x³ + 4x - 10 = 0 has a root between 1 and 2.",
+            solution: "Let f(x) = x³ + 4x - 10. f(1) = 1 + 4 - 10 = -5 < 0 and f(2) = 8 + 8 - 10 = 6 > 0. Since f is continuous and changes sign, by IVT, there exists c in [1,2] where f(c) = 0."
+          }
+        ]
+      },
+      {
+        id: 7,
+        title: "Practice Problems",
+        content: "These are typical JEE Advanced level problems on limits and continuity. Try to solve them using the concepts we've covered.",
+        audioUrl: "/audio/slide7.mp3",
+        examples: [
+          {
+            problem: "Find lim(x→∞) [x(√(x² + 1) - x)]",
+            solution: "Multiply numerator and denominator by (√(x² + 1) + x). After simplification, we get lim(x→∞) [x²/(√(x² + 1) + x)] = lim(x→∞) [x/√(1 + 1/x²) + 1] = 1/2"
+          },
+          {
+            problem: "Find all values of k for which f(x) = {kx², if x ≤ 1; 3x + k - 3, if x > 1} is continuous at x = 1.",
+            solution: "For continuity at x = 1, we need f(1-) = f(1+), which gives k(1)² = 3(1) + k - 3, so k = 3."
+          }
+        ]
+      }
+    ],
+    transcriptText: `This tutorial covers Limits and Continuity, essential topics for JEE Advanced Mathematics. 
+    
+    We begin by defining limits as the value a function approaches as the input approaches some value. Understanding this concept is critical for calculus.
+    
+    Next, we explore important properties of limits, including sum, product, and quotient rules. We also discuss special techniques for evaluating limits when direct substitution leads to indeterminate forms.
+    
+    For continuity, we examine the three conditions required for a function to be continuous at a point. We analyze different types of discontinuities, such as removable, jump, and essential discontinuities.
+    
+    The Intermediate Value Theorem is presented as a powerful tool for proving the existence of roots within a given interval.
+    
+    Finally, we work through practice problems typical of JEE Advanced examinations to reinforce these concepts and prepare you for the challenging questions you'll encounter on the exam.`
+  };
